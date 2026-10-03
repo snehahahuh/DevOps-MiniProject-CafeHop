@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Favorites | CafeHop</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            ☕ CafeHop
+        </div>
+
+        <nav>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/#cafes">
+                Explore Cafes
+            </a>
+
+            <a href="/favorites">
+                ❤️ Favorites
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- FAVORITES -->
+
+    <main class="cafes-section">
+
+        <div class="section-heading">
+
+            <p class="small-heading">
+                YOUR COLLECTION
+            </p>
+
+            <h2>
+                ❤️ Favorite Cafes
+            </h2>
+
+            <p>
+                Your saved cafes, all in one place.
+            </p>
+
+        </div>
+
+
+
+        {% if cafes %}
+
+        <div class="cafe-grid">
+
+            {% for cafe in cafes %}
+
+            <div class="cafe-card">
+
+                <img
+                    src="{{ cafe.image }}"
+                    alt="{{ cafe.name }}"
+                >
+
+
+                <div class="cafe-info">
+
+                    <div class="cafe-title">
+
+                        <h3>
+                            {{ cafe.name }}
+                        </h3>
+
+                        <span class="rating">
+                            ★ {{ cafe.rating }}
+                        </span>
+
+                    </div>
+
+
+                    <p class="location">
+                        📍 {{ cafe.location }}
+                    </p>
+
+
+                    <p class="category">
+                        {{ cafe.category }} · {{ cafe.price }}
+                    </p>
+
+
+                    <p class="description">
+                        {{ cafe.description }}
+                    </p>
+
+
+                    <div class="favorite-actions">
+
+                        <a
+                            href="/cafe/{{ cafe.id }}"
+                            class="view-btn"
+                        >
+                            View Cafe
+                        </a>
+
+
+                        <a
+                            href="/favorite/{{ cafe.id }}"
+                            class="remove-favorite"
+                        >
+                            ♡ Remove
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="no-results">
+
+            <h3>
+                No favorites yet ☕
+            </h3>
+
+            <p>
+                Explore cafes and save your favorites here.
+            </p>
+
+            <br>
+
+            <a
+                href="/#cafes"
+                class="view-btn"
+            >
+                Explore Cafes
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            ☕ CafeHop — Discover your next coffee spot.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

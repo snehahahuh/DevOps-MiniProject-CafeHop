@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CafeHop</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            ☕ CafeHop
+        </div>
+
+        <nav>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="#cafes">
+                Explore Cafes
+            </a>
+
+            <a href="/favorites">
+                ❤️ Favorites
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p class="tagline">
+                DISCOVER • SIP • REPEAT
+            </p>
+
+            <h1>
+                Find your next<br>
+                <span>favorite cafe.</span>
+            </h1>
+
+            <p class="hero-text">
+                Discover cozy cafes, great coffee and beautiful
+                places around you.
+            </p>
+
+            <a
+                href="#cafes"
+                class="explore-btn"
+            >
+                Explore Cafes →
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CAFE SECTION -->
+
+    <section
+        class="cafes-section"
+        id="cafes"
+    >
+
+        <div class="section-heading">
+
+            <p class="small-heading">
+                EXPLORE
+            </p>
+
+            <h2>
+                Popular Cafes
+            </h2>
+
+            <p>
+                Find your perfect spot for coffee, food and good vibes.
+            </p>
+
+        </div>
+
+
+
+        <!-- SEARCH + FILTERS -->
+
+        <form
+            class="filter-form"
+            action="/"
+            method="GET"
+        >
+
+            <!-- SEARCH -->
+
+            <input
+                type="text"
+                name="search"
+                placeholder="Search cafe, location or category..."
+                value="{{ search }}"
+            >
+
+
+            <!-- CATEGORY -->
+
+            <select name="category">
+
+                <option value="">
+                    All Categories
+                </option>
+
+                <option
+                    value="coffee & cafe"
+                    {% if category == "coffee & cafe" %}
+                    selected
+                    {% endif %}
+                >
+                    Coffee & Cafe
+                </option>
+
+                <option
+                    value="cafe & bakery"
+                    {% if category == "cafe & bakery" %}
+                    selected
+                    {% endif %}
+                >
+                    Cafe & Bakery
+                </option>
+
+                <option
+                    value="coffee & breakfast"
+                    {% if category == "coffee & breakfast" %}
+                    selected
+                    {% endif %}
+                >
+                    Coffee & Breakfast
+                </option>
+
+                <option
+                    value="coffee & desserts"
+                    {% if category == "coffee & desserts" %}
+                    selected
+                    {% endif %}
+                >
+                    Coffee & Desserts
+                </option>
+
+            </select>
+
+
+
+            <!-- MINIMUM RATING -->
+
+            <select name="rating">
+
+                <option value="">
+                    Any Rating
+                </option>
+
+                <option
+                    value="4.0"
+                    {% if min_rating == "4.0" %}
+                    selected
+                    {% endif %}
+                >
+                    4.0+ ⭐
+                </option>
+
+                <option
+                    value="4.5"
+                    {% if min_rating == "4.5" %}
+                    selected
+                    {% endif %}
+                >
+                    4.5+ ⭐
+                </option>
+
+            </select>
+
+
+
+            <!-- SORT -->
+
+            <select name="sort">
+
+                <option value="">
+                    Sort by Rating
+                </option>
+
+                <option
+                    value="high"
+                    {% if sort == "high" %}
+                    selected
+                    {% endif %}
+                >
+                    Highest Rated
+                </option>
+
+                <option
+                    value="low"
+                    {% if sort == "low" %}
+                    selected
+                    {% endif %}
+                >
+                    Lowest Rated
+                </option>
+
+            </select>
+
+
+
+            <!-- SEARCH BUTTON -->
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+
+
+        <!-- ACTIVE FILTER -->
+
+        {% if search or category or min_rating or sort %}
+
+        <div class="active-filter">
+
+            Showing filtered results
+
+            <a href="/">
+                Clear filters
+            </a>
+
+        </div>
+
+        {% endif %}
+
+
+
+        <!-- NO RESULTS -->
+
+        {% if not cafes %}
+
+        <div class="no-results">
+
+            <h3>
+                No cafes found 😭
+            </h3>
+
+            <p>
+                Try changing your search or filters.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+
+        <!-- CAFE CARDS -->
+
+        <div class="cafe-grid">
+
+            {% for cafe in cafes %}
+
+            <div class="cafe-card">
+
+
+                <!-- IMAGE -->
+
+                <img
+                    src="{{ cafe.image }}"
+                    alt="{{ cafe.name }}"
+                >
+
+
+                <div class="cafe-info">
+
+
+                    <!-- TITLE + RATING -->
+
+                    <div class="cafe-title">
+
+                        <h3>
+                            {{ cafe.name }}
+                        </h3>
+
+                        <span class="rating">
+                            ★ {{ cafe.rating }}
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- LOCATION -->
+
+                    <p class="location">
+                        📍 {{ cafe.location }}
+                    </p>
+
+
+
+                    <!-- CATEGORY -->
+
+                    <p class="category">
+                        {{ cafe.category }} · {{ cafe.price }}
+                    </p>
+
+
+
+                    <!-- DESCRIPTION -->
+
+                    <p class="description">
+                        {{ cafe.description }}
+                    </p>
+
+
+
+                    <!-- ACTION BUTTONS -->
+
+                    <div class="favorite-actions">
+
+
+                        <a
+                            href="/cafe/{{ cafe.id }}"
+                            class="view-btn"
+                        >
+                            View Cafe
+                        </a>
+
+
+
+                        {% if cafe.id in favorites %}
+
+                        <a
+                            href="/favorite/{{ cafe.id }}"
+                            class="favorite-btn active"
+                        >
+                            ❤️ Saved
+                        </a>
+
+                        {% else %}
+
+                        <a
+                            href="/favorite/{{ cafe.id }}"
+                            class="favorite-btn"
+                        >
+                            ♡ Favorite
+                        </a>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            ☕ CafeHop — Discover your next coffee spot.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

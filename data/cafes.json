@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "The Coffee House",
+    "location": "Thane",
+    "rating": 4.5,
+    "category": "Coffee & Cafe",
+    "price": "₹₹",
+    "description": "A cozy cafe perfect for coffee, conversations and work sessions.",
+    "image": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb"
+  },
+  {
+    "id": 2,
+    "name": "Brew & Bloom",
+    "location": "Mumbai",
+    "rating": 4.7,
+    "category": "Cafe & Bakery",
+    "price": "₹₹",
+    "description": "A beautiful cafe serving freshly brewed coffee and delicious desserts.",
+    "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24"
+  },
+  {
+    "id": 3,
+    "name": "Urban Beans",
+    "location": "Powai",
+    "rating": 4.4,
+    "category": "Coffee & Breakfast",
+    "price": "₹₹₹",
+    "description": "A modern cafe with great coffee, breakfast options and a relaxed atmosphere.",
+    "image": "https://images.unsplash.com/photo-1445116572660-236099ec97a0"
+  },
+  {
+    "id": 4,
+    "name": "Cafe Mocha",
+    "location": "Bandra",
+    "rating": 4.6,
+    "category": "Coffee & Desserts",
+    "price": "₹₹",
+    "description": "A trendy spot for mocha, desserts and casual hangouts.",
+    "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
+  }
+]

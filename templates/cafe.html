@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ cafe.name }} | CafeHop</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            ☕ CafeHop
+        </div>
+
+        <nav>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/#cafes">
+                Explore Cafes
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- CAFE DETAILS -->
+
+    <main class="cafe-detail">
+
+        <div class="detail-image-wrapper">
+
+            <img
+                class="detail-image"
+                src="{{ cafe.image }}"
+                alt="{{ cafe.name }}"
+            >
+
+        </div>
+
+
+
+        <div class="detail-content">
+
+            <p class="small-heading">
+                {{ cafe.category }}
+            </p>
+
+
+            <h1>
+                {{ cafe.name }}
+            </h1>
+
+
+            <div class="detail-rating">
+
+                ★ {{ cafe.rating }}
+
+            </div>
+
+
+            <p class="detail-location">
+
+                📍 {{ cafe.location }}
+
+            </p>
+
+
+            <p class="detail-price">
+
+                {{ cafe.price }}
+
+            </p>
+
+
+            <p class="detail-description">
+
+                {{ cafe.description }}
+
+            </p>
+
+
+            <div class="detail-buttons">
+
+                <a
+                    href="https://www.google.com/maps/search/?api=1&query={{ cafe.name }} {{ cafe.location }}"
+                    target="_blank"
+                    class="view-btn"
+                >
+                    📍 Get Directions
+                </a>
+
+
+                <a
+                    href="/"
+                    class="back-link"
+                >
+                    ← Back to cafes
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            ☕ CafeHop — Discover your next coffee spot.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
