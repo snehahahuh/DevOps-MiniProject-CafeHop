@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, Response
 import json
 import os
 
@@ -7,6 +7,14 @@ app = Flask(__name__)
 app.secret_key = "cafehop-secret-key"
 
 DATA_FILE = os.path.join("data", "cafes.json")
+
+request_count = 0
+
+
+@app.before_request
+def count_requests():
+    global request_count
+    request_count += 1
 
 
 def load_cafes():
@@ -140,6 +148,24 @@ def favorites():
     return render_template(
         "favorites.html",
         cafes=favorite_cafes
+    )
+
+
+@app.route("/metrics")
+def metrics():
+
+    metrics_data = f"""# HELP cafehop_requests_total Total number of requests received by CafeHop.
+# TYPE cafehop_requests_total counter
+cafehop_requests_total {request_count}
+
+# HELP cafehop_up Indicates that the CafeHop application is running.
+# TYPE cafehop_up gauge
+cafehop_up 1
+"""
+
+    return Response(
+        metrics_data,
+        mimetype="text/plain"
     )
 
 

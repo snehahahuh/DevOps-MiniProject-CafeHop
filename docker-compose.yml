@@ -1,7 +1,27 @@
-services:
+﻿services:
   cafehop:
     build: .
     container_name: cafehop-container
     ports:
       - "5000:5000"
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: cafehop-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - cafehop
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: cafehop-grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
     restart: unless-stopped
