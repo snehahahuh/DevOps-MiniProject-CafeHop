@@ -1,0 +1,7 @@
+services:
+  cafehop:
+    build: .
+    container_name: cafehop-container
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
